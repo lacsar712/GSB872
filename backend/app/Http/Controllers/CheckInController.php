@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CheckIn;
+use App\Models\Streak;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,9 @@ class CheckInController extends Controller
             'chapters' => $request->chapters,
             'comment' => $request->comment,
         ]);
+
+        $streak = Streak::getOrCreateForUser($request->user()->id);
+        $streak->recordCheckIn(Carbon::today());
 
         return response()->json($checkIn, 201);
     }
