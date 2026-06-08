@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BibleController;
 use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\CheckInStreakController;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
@@ -19,9 +20,14 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/checkins', [CheckInController::class, 'index']);
     Route::post('/checkins', [CheckInController::class, 'store']);
-    Route::get('/checkins/history', [CheckInController::class, 'history']); // My history
-    Route::get('/checkins/user/{id}', [CheckInController::class, 'userHistory']); // Specific user history
+    Route::get('/checkins/history', [CheckInController::class, 'history']);
+    Route::get('/checkins/user/{id}', [CheckInController::class, 'userHistory']);
     Route::get('/checkins/rankings', [CheckInController::class, 'rankings']);
     Route::get('/checkins/search', [CheckInController::class, 'search']);
     Route::post('/checkins/{id}/like', [CheckInController::class, 'like']);
+
+    Route::get('/streak', [CheckInStreakController::class, 'getStatus']);
+    Route::post('/streak/checkin', [CheckInStreakController::class, 'checkIn']);
+    Route::get('/streak/monthly', [CheckInStreakController::class, 'getMonthly']);
+    Route::get('/streak/user/{id}', [CheckInStreakController::class, 'getUserStreak']);
 });
