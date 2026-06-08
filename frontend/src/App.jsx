@@ -7,6 +7,7 @@ import CheckInPage from './pages/CheckInPage';
 import RankingsPage from './pages/RankingsPage';
 import ProfilePage from './pages/ProfilePage';
 import UserCheckInPage from './pages/UserCheckInPage';
+import StreakPage from './pages/StreakPage';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -40,6 +41,13 @@ function App() {
             <ProtectedRoute>
                 <Layout>
                     <RankingsPage />
+                </Layout>
+            </ProtectedRoute>
+        } />
+        <Route path="/streak" element={
+            <ProtectedRoute>
+                <Layout>
+                    <StreakPage />
                 </Layout>
             </ProtectedRoute>
         } />
