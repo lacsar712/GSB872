@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CheckIn;
+use App\Models\CheckInStreak;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +18,16 @@ class CheckInController extends Controller
             'comment' => 'nullable|string',
         ]);
 
+        $userId = $request->user()->id;
+        
         $checkIn = CheckIn::create([
-            'user_id' => $request->user()->id,
+            'user_id' => $userId,
             'book_name' => $request->book_name,
             'chapters' => $request->chapters,
             'comment' => $request->comment,
         ]);
+
+        CheckInStreak::recordCheckIn($userId);
 
         return response()->json($checkIn, 201);
     }
