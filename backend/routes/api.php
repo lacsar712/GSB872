@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BibleController;
 use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\StreakController;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
@@ -24,4 +25,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/checkins/rankings', [CheckInController::class, 'rankings']);
     Route::get('/checkins/search', [CheckInController::class, 'search']);
     Route::post('/checkins/{id}/like', [CheckInController::class, 'like']);
+
+    Route::get('/streak', [StreakController::class, 'show']);
 });
