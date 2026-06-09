@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, BookOpen, Trophy, User } from 'lucide-react';
+import { Home, BookOpen, Trophy, User, Flame } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Layout = ({ children }) => {
@@ -8,6 +8,7 @@ const Layout = ({ children }) => {
     const navItems = [
         { icon: Home, label: '首页', path: '/' },
         { icon: BookOpen, label: '打卡', path: '/checkin' },
+        { icon: Flame, label: '连续', path: '/streak' },
         { icon: Trophy, label: '排行', path: '/rankings' },
         { icon: User, label: '我的', path: '/profile' },
     ];

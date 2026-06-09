@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CheckIn;
+use App\Models\Streak;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,10 @@ class CheckInController extends Controller
             'chapters' => $request->chapters,
             'comment' => $request->comment,
         ]);
+
+        // Update streak: same-day duplicates won't increment thanks to Streak::registerCheckIn.
+        $streak = Streak::firstOrCreate(['user_id' => $request->user()->id]);
+        $streak->registerCheckIn(Carbon::now());
 
         return response()->json($checkIn, 201);
     }
